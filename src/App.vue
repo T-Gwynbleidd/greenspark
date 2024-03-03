@@ -1,18 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <main class='container'>
+    <h1 class='title'>Per product widgets</h1>
+    <hr class='line-break'>
+    <section class='widget-container'>
+      <ProductWidget
+        :id=1
+        type='carbon'
+        :amount=100
+        action='offsets'
+        v-model:linked='linked'
+        v-model:active='active'
+        v-model:selected-color='selectedColor'
+        />
+    </section>
+  </main>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+<script setup lang="ts">
+import { ref, Ref } from 'vue';
+import { SelectedColorType } from '@/types';
+import ProductWidget from './components/ProductWidget.vue';
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-});
+const linked = ref(false);
+const active = ref(true);
+const selectedColor: Ref<SelectedColorType> = ref('blue');
 </script>
 
 <style lang="scss">
