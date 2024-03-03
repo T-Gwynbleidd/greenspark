@@ -37,14 +37,7 @@
 
 <script setup lang="ts">
 import { defineModel, defineProps } from 'vue';
-import { ActionType, ImpactType, SelectedColorType } from '@/types';
-
-interface ProductWidgetProps {
-  id: number;
-  type: ImpactType;
-  amount: number;
-  action: ActionType;
-}
+import { ProductWidgetProps, SelectedColorType } from '@/types';
 
 defineProps<ProductWidgetProps>();
 const linked = defineModel<boolean>('linked');

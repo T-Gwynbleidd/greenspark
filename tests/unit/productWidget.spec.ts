@@ -1,6 +1,6 @@
+import { ComponentPublicInstance } from 'vue';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import ProductWidget from '@/components/ProductWidget.vue';
-import { ComponentPublicInstance } from 'vue';
 
 let wrapper: VueWrapper<any, ComponentPublicInstance<{}, any>>;
 
