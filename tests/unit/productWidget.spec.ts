@@ -123,7 +123,7 @@ describe('ProductWidget', () => {
   // });
 
   it('Has a a radio input called "badge_colour", and has five of them', () => {
-    expect(wrapper.find('input[type=radio][name=badge_colour]').exists()).toBe(
+    expect(wrapper.find('input[type=radio][name^=badge_colour]').exists()).toBe(
       true
     );
     expect(wrapper.findAll('input[type=radio]').length).toBe(5);
@@ -136,10 +136,14 @@ describe('ProductWidget', () => {
     );
   });
 
-  it('The default is that all "badge_colour" radio inputs are false', () => {
+  it('The default selection is that "badge_colour" radio input is white', () => {
     const radioInputs = wrapper.vm.$el.querySelectorAll('input[type=radio]');
     radioInputs.forEach((radio: any) => {
-      expect(radio.checked).toBe(false);
+      if (radio.value === 'white') {
+        expect(radio.checked).toBe(true);
+      } else {
+        expect(radio.checked).toBe(false);
+      }
     });
   });
 
