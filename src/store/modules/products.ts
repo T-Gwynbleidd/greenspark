@@ -57,6 +57,29 @@ const mutations = {
       }
     }
   },
+
+  changeActiveProduct(
+    state: ProductsStateInterface,
+    payload: AmendProductInterface
+  ) {
+    try {
+      state.allProducts.forEach((product) => {
+        if (product.id === payload.id) {
+          if ('active' in payload && payload.active !== undefined) {
+            product.active = payload.active;
+          }
+        } else {
+          product.active = false;
+        }
+      });
+    } catch (error) {
+      if (debug) {
+        console.error(
+          `Store module, products mutation error: ${getErrorMessage(error)}`
+        );
+      }
+    }
+  },
 };
 
 // actions
@@ -78,6 +101,17 @@ const actions = {
       commit('amendProduct', payload);
     } else {
       console.warn('No product passed to amendProduct action.');
+    }
+  },
+
+  async changeActiveProduct(
+    { commit }: { commit: Commit },
+    payload: AmendProductInterface
+  ) {
+    if (payload) {
+      commit('changeActiveProduct', payload);
+    } else {
+      console.warn('No product passed to changeActiveProduct action.');
     }
   },
 };

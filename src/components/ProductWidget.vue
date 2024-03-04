@@ -66,7 +66,11 @@ const computedActive = computed({
     return props.active;
   },
   set(newValue) {
-    store.dispatch('products/amendProduct', {id: props.id, active: newValue});
+    if (newValue === true) {
+      store.dispatch('products/changeActiveProduct', {id: props.id, active: newValue});
+    } else {
+      store.dispatch('products/amendProduct', {id: props.id, active: newValue});
+    }
   }
 });
 
@@ -74,7 +78,6 @@ const computedActive = computed({
 // TODO, query what should public profile link to
 // --- is there a default color, or can it be blank?
 // TODO, vuex & test top level
-// --- (Only one widget can have the active state at a time)
 // Please include a README describing what you’ve done and why, and how to run and use the service.
 </script>
 
