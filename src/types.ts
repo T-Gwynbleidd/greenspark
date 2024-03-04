@@ -4,23 +4,23 @@ export type ImpactType = 'carbon' | 'plastic bottles' | 'trees';
 
 export type SelectedColorType = 'white' | 'black' | 'blue' | 'green' | 'beige';
 
-export interface ProductWidgetProps {
+export interface AmendProductInterface {
   id: number;
-  type: ImpactType;
-  amount: number;
-  action: ActionType;
-}
-
-export interface ProductWidgetInterface extends ProductWidgetProps {
   linked?: boolean;
   selectedColor?: SelectedColorType;
   active?: boolean;
 }
 
+export interface ProductWidgetProps extends AmendProductInterface {
+  type: ImpactType;
+  amount: number;
+  action: ActionType;
+}
+
 export interface ProductsStateInterface {
-  allProducts: ProductWidgetInterface[];
+  allProducts: ProductWidgetProps[];
 }
 
 export interface StateInterface {
-  products: { allProducts: ProductWidgetInterface[] };
+  products: { allProducts: ProductWidgetProps[] };
 }

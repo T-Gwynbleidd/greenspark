@@ -4,26 +4,26 @@
     <hr class='line-break'>
     <section class='widget-container'>
       <ProductWidget
-        :id=1
-        type='carbon'
-        :amount=100
-        action='offsets'
-        v-model:linked='linked'
-        v-model:active='active'
-        v-model:selected-color='selectedColor'
+        v-for="(product) in store.state.products.allProducts"
+        :key='product.id'
+        :id='product.id'
+        :type='product.type'
+        :amount='product.amount'
+        :action='product.action'
+        :linked='product.linked'
+        :active='product.active'
+        :selected-color='product.selectedColor'
         />
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
-import { SelectedColorType } from '@/types';
+import { useStore } from './store'
 import ProductWidget from './components/ProductWidget.vue';
 
-const linked = ref(false);
-const active = ref(true);
-const selectedColor: Ref<SelectedColorType> = ref('blue');
+const store = useStore();
+store.dispatch('products/getAllProducts');
 </script>
 
 <style lang="scss">

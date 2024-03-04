@@ -1,6 +1,13 @@
 import { Commit } from 'vuex';
-import { ProductWidgetInterface, ProductsStateInterface } from '@/types';
+import {
+  AmendProductInterface,
+  ProductWidgetProps,
+  ProductsStateInterface,
+} from '@/types';
 import getProducts from '@/api/products';
+import getErrorMessage from '@/util/error';
+
+const debug = process.env.NODE_ENV !== 'production';
 
 // initial state
 const state = (): ProductsStateInterface => {
@@ -16,23 +23,38 @@ const getters = {};
 const mutations = {
   setProducts(
     state: ProductsStateInterface,
-    payload: { products: ProductWidgetInterface[] }
+    payload: { products: ProductWidgetProps[] }
   ) {
     state.allProducts = payload.products;
   },
 
-  amendProduct(state: ProductsStateInterface, payload: ProductWidgetInterface) {
-    const product = state.allProducts.find(
-      (product) => product.id === payload.id
-    );
-    if (product) {
-      product.linked = payload.linked;
-      product.selectedColor = payload.selectedColor;
-      product.active = payload.active;
-    } else {
-      throw new Error(
-        'State mutation: amendProduct. No matching product found.'
+  amendProduct(state: ProductsStateInterface, payload: AmendProductInterface) {
+    try {
+      const product = state.allProducts.find(
+        (product) => product.id === payload.id
       );
+      if (product) {
+        if ('linked' in payload && payload.linked !== undefined) {
+          product.linked = payload.linked;
+        } else if (
+          'selectedColor' in payload &&
+          payload.selectedColor !== undefined
+        ) {
+          product.selectedColor = payload.selectedColor;
+        } else if ('active' in payload && payload.active !== undefined) {
+          product.active = payload.active;
+        }
+      } else {
+        throw new Error(
+          'State mutation: amendProduct. No matching product found.'
+        );
+      }
+    } catch (error) {
+      if (debug) {
+        console.error(
+          `Store module, products mutation error: ${getErrorMessage(error)}`
+        );
+      }
     }
   },
 };
@@ -42,7 +64,20 @@ const actions = {
   async getAllProducts({ commit }: { commit: Commit }) {
     const products = await getProducts();
     if (products) {
-      commit('setProducts', products);
+      commit('setProducts', { products });
+    } else {
+      console.warn('No products returned by API.');
+    }
+  },
+
+  async amendProduct(
+    { commit }: { commit: Commit },
+    payload: AmendProductInterface
+  ) {
+    if (payload) {
+      commit('amendProduct', payload);
+    } else {
+      console.warn('No product passed to amendProduct action.');
     }
   },
 };

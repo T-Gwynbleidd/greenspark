@@ -7,8 +7,8 @@
 
     <div class='productWidget__contents'>
       <div class='productWidget__inputRow'>
-        <input type="checkbox" id="linked" name="linked" value="linked" class='productWidget__input' v-model='linked'>
-        <label for="linked" class='productWidget__label'>Link to Public Profile</label>
+        <input type="checkbox" :id="`linked-${id}`" name="linked" value="linked" class='productWidget__input' v-model='computedLinked'>
+        <label :for="`linked-${id}`" class='productWidget__label'>Link to Public Profile</label>
         <div class='productWidget__tooltip'>
           <img v-svg-inline class="icon tooltip" src="../assets/tooltip.svg" alt="tooltip icon" />
           <div class='productWidget__tooltipDetails'>
@@ -19,37 +19,62 @@
       </div>
       
       <div class='productWidget__inputRow'>
-        <label for='badge_colour'>Badge colour</label>
-        <input type="radio" id="blue" name="badge_colour" value="blue" aria-label='blue badge colour' v-model="selectedColor">
-        <input type="radio" id="green" name="badge_colour" value="green" aria-label='green badge colour' v-model="selectedColor">
-        <input type="radio" id="beige" name="badge_colour" value="beige" aria-label='beige badge colour' v-model="selectedColor">
-        <input type="radio" id="white" name="badge_colour" value="white" aria-label='white badge colour' v-model="selectedColor">
-        <input type="radio" id="black" name="badge_colour" value="black" aria-label='black badge colour' v-model="selectedColor">
+        <label :for="`badge_colour-${id}`">Badge colour</label>
+        <input type="radio" :id="`blue-${id}`" :name="`badge_colour-${id}`" :value='"blue"' aria-label='blue badge colour' v-model="computedColor">
+        <input type="radio" :id="`green-${id}`" :name="`badge_colour-${id}`" :value='"green"' aria-label='green badge colour' v-model="computedColor">
+        <input type="radio" :id="`beige-${id}`" :name="`badge_colour-${id}`" :value='"beige"' aria-label='beige badge colour' v-model="computedColor">
+        <input type="radio" :id="`white-${id}`" :name="`badge_colour-${id}`" :value='"white"' aria-label='white badge colour' v-model="computedColor">
+        <input type="radio" :id="`black-${id}`" :name="`badge_colour-${id}`" :value='"black"' aria-label='black badge colour' v-model="computedColor">
       </div>
-      
       <div class='productWidget__inputRow'>
-        <input type="checkbox" id="active" name="active" value="active" class='productWidget__input' v-model='active'>
-        <label for="active" class='productWidget__label'>Activate Badge</label>
+        <input type="checkbox" :id="`active-${id}`" name="active" value="active" class='productWidget__input' v-model='computedActive'>
+        <label :for="`active-${id}`" class='productWidget__label'>Activate Badge</label>
       </div>
     </div>
   </aside>
 </template>
 
 <script setup lang="ts">
-import { defineModel, defineProps } from 'vue';
+import { computed, defineProps } from 'vue';
 import { ProductWidgetProps, SelectedColorType } from '@/types';
+import { useStore } from '@/store'
 
-defineProps<ProductWidgetProps>();
-const linked = defineModel<boolean>('linked');
-const selectedColor = defineModel<SelectedColorType>('selectedColor');
-const active = defineModel<boolean>('active');
+const store = useStore();
+const props = defineProps<ProductWidgetProps>();
+const computedLinked = computed({
+  get() {
+    return props.linked;
+  },
+  set(newValue) {
+    store.dispatch('products/amendProduct', {id: props.id, linked: newValue});
+  }
+});
+const computedColor = computed({
+  get() {
+    if (props.selectedColor !== undefined) {
+      return props.selectedColor;
+    } else {
+      return 'white';
+    }
+  },
+  set(newValue: SelectedColorType) {
+    store.dispatch('products/amendProduct', {id: props.id, selectedColor: newValue});
+  }
+});
+const computedActive = computed({
+  get() {
+    return props.active;
+  },
+  set(newValue) {
+    store.dispatch('products/amendProduct', {id: props.id, active: newValue});
+  }
+});
 
 // TODO, style widget
 // TODO, query what should public profile link to
 // --- is there a default color, or can it be blank?
 // TODO, vuex & test top level
 // --- (Only one widget can have the active state at a time)
-// --- Initial values from https://api.mocki.io/v2/016d11e8/product-widgets
 // Please include a README describing what you’ve done and why, and how to run and use the service.
 </script>
 

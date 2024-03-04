@@ -1,11 +1,12 @@
 import { ComponentPublicInstance } from 'vue';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
+import { ProductWidgetProps } from '@/types';
 import ProductWidget from '@/components/ProductWidget.vue';
 
 let wrapper: VueWrapper<any, ComponentPublicInstance<{}, any>>;
 
 beforeEach(() => {
-  const intitialProps = {
+  const intitialProps: ProductWidgetProps = {
     id: 1,
     type: 'plastic bottles',
     amount: 100,
@@ -130,7 +131,7 @@ describe('ProductWidget', () => {
 
   it('The "badge_colour" radio group has a label that includes matching text', () => {
     const text = 'Badge colour';
-    expect(wrapper.find('label[for=badge_colour]').text()).toMatch(
+    expect(wrapper.find('label[for^=badge_colour]').text()).toMatch(
       new RegExp(`^${text}?`)
     );
   });
