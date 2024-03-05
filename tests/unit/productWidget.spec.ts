@@ -107,9 +107,9 @@ describe('ProductWidget', () => {
 
   it('This "linked" checkbox has a label that includes matching text', () => {
     const text = 'Link to Public Profile';
-    expect(
-      wrapper.find('input[type=checkbox][name=linked]+label').text()
-    ).toMatch(new RegExp(`^${text}?`));
+    expect(wrapper.find('label[for^=linked-]').text()).toMatch(
+      new RegExp(`^${text}?`)
+    );
   });
 
   it('Defaults the "linked" checkbox to false', async () => {
@@ -226,9 +226,9 @@ describe('ProductWidget', () => {
 
   it('This "active" checkbox has a label that includes matching text', () => {
     const text = 'Activate Badge';
-    expect(
-      wrapper.find('input[type=checkbox][name=active]+label').text()
-    ).toMatch(new RegExp(`^${text}?`));
+    expect(wrapper.find('label[for^=active-]').text()).toMatch(
+      new RegExp(`^${text}?`)
+    );
   });
 
   it('Defaults the "active" checkbox to false', async () => {
