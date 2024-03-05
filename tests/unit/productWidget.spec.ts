@@ -1,7 +1,17 @@
 import { ComponentPublicInstance } from 'vue';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
-import { ProductWidgetProps } from '@/types';
+import { createStore } from 'vuex';
+import 'cross-fetch/polyfill';
+import { ProductWidgetProps, StateInterface } from '@/types';
+import { key } from '@/store';
+import products from '@/store/modules/products';
 import ProductWidget from '@/components/ProductWidget.vue';
+
+const store = createStore<StateInterface>({
+  modules: {
+    products,
+  },
+});
 
 let wrapper: VueWrapper<any, ComponentPublicInstance<{}, any>>;
 
@@ -15,6 +25,9 @@ beforeEach(() => {
   wrapper = shallowMount(ProductWidget, {
     attachTo: document.body,
     props: intitialProps,
+    global: {
+      plugins: [[store, key]],
+    },
   });
 });
 
@@ -106,7 +119,7 @@ describe('ProductWidget', () => {
   });
 
   it.todo('The tooltip details are hidden by default');
-  // Looking at vue test util docs, the below should code should work, but doesn't
+  // NOTE: Looking at vue test util docs, the below should code should work, but doesn't
   // , () => {
   //   expect(wrapper.find('.productWidget__tooltipDetails').isVisible()).toBe(
   //     false
@@ -114,7 +127,7 @@ describe('ProductWidget', () => {
   // });
 
   it.todo('Hovering the tooltip displays the details');
-  // Looking at vue test util docs, the below should code should work, but doesn't
+  // NOTE: Looking at vue test util docs, the below should code should work, but doesn't
   // , async () => {
   //   await wrapper.find('.icon.tooltip').trigger('mouseover');
   //   expect(wrapper.find('.productWidget__tooltipDetails').isVisible()).toBe(

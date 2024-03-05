@@ -1,8 +1,10 @@
 <template>
-  <main class='container'>
-    <h1 class='title'>Per product widgets</h1>
-    <hr class='line-break'>
-    <section class='widget-container'>
+  <section class='container'>
+    <header>
+      <h1 class='title'>Per product widgets</h1>
+      <hr class='line-break'>
+    </header>
+    <main class='widget-container'>
       <ProductWidget
         v-for="(product) in store.state.products.allProducts"
         :key='product.id'
@@ -14,8 +16,8 @@
         :active='product.active'
         :selected-color='product.selectedColor'
         />
-    </section>
-  </main>
+    </main>
+  </section>
 </template>
 
 <script setup lang="ts">
