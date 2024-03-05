@@ -16,7 +16,7 @@
             <img v-svg-inline class="icon tooltip" src="../assets/tooltip.svg" alt="tooltip icon" />
             <div class='productWidget__tooltipDetails'>
               <p>This widget links directly to your public profile so that you can easily share your impact with your customers. Turn it off here if you do not want the badge to link to it.</p>
-              <a href='#'>View Public Profile</a>
+              <a href='#' class='cabin-bold'>View Public Profile</a>
             </div>
           </div>
         </div>
@@ -106,8 +106,8 @@ const computedActive = computed({
     display: flex;
     flex-flow: row;
     gap: 24px;
-
-    // TODO, transition
+    transition: .25s all ease;
+          
     &--white {
       background-color: #FFFFFF;
       color: #3B755F;
@@ -159,6 +159,10 @@ const computedActive = computed({
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
+
+    input {
+      cursor: pointer;
+    }
   }
 
   &__inputCol {
@@ -178,6 +182,7 @@ const computedActive = computed({
     font-size: 14px;
     line-height: 17.01px;
     color: #3B755F;
+    cursor: pointer;
   }
 
   &__tooltip {
@@ -188,6 +193,7 @@ const computedActive = computed({
       color: #3B755F;
       height: 12px;
       width: 12px;
+      cursor: pointer;
 
       &:hover, &:focus {
         ~ #{ $block }__tooltipDetails {
@@ -195,6 +201,7 @@ const computedActive = computed({
           opacity: 1;
           transition: .25s all ease;
           transition-delay: 0s;
+          transform: translateX(-30%);
         }
       }
     }
@@ -205,10 +212,36 @@ const computedActive = computed({
       opacity: 0;
       transition: .25s all ease;
       transition-delay: .25s;
+      border-radius: 4px;
+      padding: 24px 16px 24px 16px;
+      width: 248px;
+      background-color: #FFFFFF;
+      z-index: 1;
+      text-align: center;
+      font-size: 14px;
+      line-height: 17.01px;
+      left: 50%;
+      box-shadow: 0px 42px 76px 0px #00000026;
+
 
       &:hover, &:focus {
         visibility: visible;
         opacity: 1;
+        transform: translateX(-30%);
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      a {
+        letter-spacing: -2%;
+        color: #3B755F;
+        text-decoration: none;
+
+        &:hover, &:focus {
+          text-decoration: underline;
+        }
       }
     }
   }
