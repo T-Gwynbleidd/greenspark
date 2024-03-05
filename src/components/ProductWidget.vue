@@ -6,10 +6,12 @@
     </header>
 
     <div class='productWidget__contents'>
-      <div class='productWidget__inputContainer'>
+      <div class='productWidget__inputRow'>
         <div class='productWidget__inputCol productWidget__inputCol--right'>
-          <input type="checkbox" :id="`linked-${id}`" name="linked" value="linked" class='productWidget__input productWidget__input--checkbox' v-model='computedLinked'>
-          <span class='checkbox'></span>
+          <div class='productWidget__inputContainer'>
+            <input type="checkbox" :id="`linked-${id}`" name="linked" value="linked" class='productWidget__input productWidget__input--checkbox' v-model='computedLinked'>
+            <span class='checkbox'></span>
+          </div>
         </div>
         <div class='productWidget__inputCol productWidget__inputCol--left'>
           <label :for="`linked-${id}`" class='productWidget__label'>Link to Public Profile</label>
@@ -23,22 +25,42 @@
         </div>
       </div>
       
-      <div class='productWidget__inputContainer'>
+      <div class='productWidget__inputRow'>
         <div class='productWidget__inputCol productWidget__inputCol--left'>
-          <label :for="`badge_colour-${id}`" class='productWidget__label'>Badge colour</label>
+          <label :for="`badge_colour-${id}`" class='productWidget__label productWidget__label--no-point'>Badge colour</label>
         </div>
         <div class='productWidget__inputCol productWidget__inputCol--right'>
-          <input type="radio" :id="`blue-${id}`" :name="`badge_colour-${id}`" :value='"blue"' aria-label='blue badge colour' v-model="computedColor">
-          <input type="radio" :id="`green-${id}`" :name="`badge_colour-${id}`" :value='"green"' aria-label='green badge colour' v-model="computedColor">
-          <input type="radio" :id="`beige-${id}`" :name="`badge_colour-${id}`" :value='"beige"' aria-label='beige badge colour' v-model="computedColor">
-          <input type="radio" :id="`white-${id}`" :name="`badge_colour-${id}`" :value='"white"' aria-label='white badge colour' v-model="computedColor">
-          <input type="radio" :id="`black-${id}`" :name="`badge_colour-${id}`" :value='"black"' aria-label='black badge colour' v-model="computedColor">
+          <div class='productWidget__inputContainer'>
+            <input type="radio" :id="`blue-${id}`" :name="`badge_colour-${id}`" :value='"blue"' aria-label='blue badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+            <span class='radio radio--blue'></span>
+          </div>
+            <div class='productWidget__inputContainer'>
+            <input type="radio" :id="`green-${id}`" :name="`badge_colour-${id}`" :value='"green"' aria-label='green badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+            <span class='radio radio--green'></span>
+          </div>
+          <div class='productWidget__inputContainer'>
+            <input type="radio" :id="`beige-${id}`" :name="`badge_colour-${id}`" :value='"beige"' aria-label='beige badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+            <span class='radio radio--beige'></span>
+          </div>
+          <div class='productWidget__inputContainer'>
+            <input type="radio" :id="`white-${id}`" :name="`badge_colour-${id}`" :value='"white"' aria-label='white badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+            <span class='radio radio--white'></span>
+          </div>
+          <div class='productWidget__inputContainer'>
+            <input type="radio" :id="`black-${id}`" :name="`badge_colour-${id}`" :value='"black"' aria-label='black badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+            <span class='radio radio--black'></span>
+          </div>
         </div>
       </div>
 
-      <div class='productWidget__inputContainer'>
+      <div class='productWidget__inputRow'>
         <div class='productWidget__inputCol productWidget__inputCol--right'>
-          <input type="checkbox" :id="`active-${id}`" name="active" value="active" class='productWidget__input' v-model='computedActive'>
+          <div class='productWidget__inputContainer'>
+            <input type="checkbox" :id="`active-${id}`" name="active" value="active" class='productWidget__input productWidget__input--toggle' v-model='computedActive'>
+            <div class='toggle-slider'>
+              <span class='toggle'></span>
+            </div>
+          </div>
         </div>
         <div class='productWidget__inputCol productWidget__inputCol--left'>
           <label :for="`active-${id}`" class='productWidget__label'>Activate Badge</label>
@@ -88,11 +110,7 @@ const computedActive = computed({
     }
   }
 });
-// const vSvgInline = VueSvgInlinePlugin;
-
-// TODO, style widget
-// TODO, query what should public profile link to
-// --- is there a default color, or can it be blank?
+// TODO const vSvgInline = VueSvgInlinePlugin;
 </script>
 
 <style scoped lang="scss">
@@ -155,17 +173,38 @@ const computedActive = computed({
     }
   }
 
-  &__inputContainer {
+  &__contents {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+  }
+
+  &__inputRow {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
   }
 
-  &__input {
-    cursor: pointer;
+  &__inputCol {
+    display: flex;
+    flex-flow: row;
 
-    &--checkbox {
+    &--right {
+      order: 1;
+      gap: 4px;
+    }
+
+    &--left {
+      order: 0;
+    }
+  }
+
+  &__inputContainer {
+    position: relative;
+  }
+
+  &__input {
       position: absolute;
       opacity: 0;
       top: 0;
@@ -175,27 +214,47 @@ const computedActive = computed({
       z-index: 2;
       box-sizing: border-box;
       margin: 0;
+      cursor: pointer;
 
-      &:hover {
-        + .checkbox:before {
-          opacity: 0.5;
-          visibility: visible;
-        }
+    &--checkbox {
+      &:hover + .checkbox:before {
+        opacity: 0.5;
       }
 
-      &:checked {
-        + .checkbox {
-          background-color: #3B755F;
-          border-color: #3B755F;
+      &:checked + .checkbox {
+        background-color: #3B755F;
+        border-color: #3B755F;
 
-          &:before {
-            opacity: 0;
-            visibility: hidden;
-          }
+        &:before {
+          opacity: 0;
+        }
 
-          &:after {
-            display: block;
-          }
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+
+    &--radio {
+      &:hover + .radio {
+        opacity: 0.8;
+      }
+
+      &:checked + .radio {
+        border: 1.5px solid #B0B0B0;
+      }
+    }
+
+    &--toggle {
+      &:hover + .toggle-slider .toggle {
+        outline: 5.4px solid #AFC6BD80;
+      }
+
+      &:checked + .toggle-slider {
+        background-color: #3B755F;
+
+        .toggle {
+          transform: translateX(20px);
         }
       }
     }
@@ -219,44 +278,81 @@ const computedActive = computed({
       left: 50%;
       transform: translate(-50%, -50%);
       opacity: 0;
-      visibility: hidden;
       transition: .25s all ease;
       z-index: 1;
       height: 36px;
       width: 36px;
       border-radius: 100%;
+      pointer-events: none;
     }
 
     &:after {
       content: "✓";
       color: white;
       position: absolute;
-      display: none;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      opacity: 0;
+      top: -5px;
+      left: 1px;
+      transition: .25s all ease;
     }
   }
 
-  &__inputCol {
+  .radio {
+    display: block;
+    height: 16px;
+    width: 16px;
+    box-sizing: border-box;
+    box-shadow: 0px 8.5px 8.5px 0px #00000003;
+    cursor: pointer;
+    transition: .25s all ease;
+
+    &--blue {
+      background-color: #2E3A8C;
+    }
+
+    &--green {
+      background-color: #3B755F;
+    }
+
+    &--beige {
+      background-color: #F2EBDB;;
+    }
+
+    &--white {
+      background-color: #ffffff;
+    }
+
+    &--black {
+      background-color: #212121;
+    }
+  }
+
+  .toggle-slider {
     position: relative;
-    display: flex;
-    flex-flow: row;
-
-    &--right {
-      order: 1;
-    }
-
-    &--left {
-      order: 0;
-    }
+    display: block;
+    height: 20.05px;
+    width: 40.11px;
+    border-radius: 34.18px;
+    box-sizing: border-box;
+    background: #F9F9F9;
+    border: 0.59px solid #AFC6BD;
+    box-shadow: 0px 0.884669303894043px 5.897795677185059px 0px #00000026 inset;
+    cursor: pointer;
+    transition: .4s;
   }
 
-  &__input {
-    &--checkbox {
-      border: 3px solid #212121;
-      border-radius: 3px;
-    }
+  .toggle {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: 21.05px;
+    width: 21.05px;
+    background: #F9F9F9;
+    border: 0.59px solid #F2EBDB;
+    box-shadow: 0px 0px 1.1795591115951538px 0px #00000059;
+    border-radius: 29.49px;
+    transition: .4s;
+    box-sizing: border-box;
   }
 
   &__label {
@@ -264,6 +360,10 @@ const computedActive = computed({
     line-height: 17.01px;
     color: #3B755F;
     cursor: pointer;
+
+    &--no-point {
+      cursor: auto;
+    }
   }
 
   &__tooltip {
@@ -325,12 +425,6 @@ const computedActive = computed({
         }
       }
     }
-  }
-
-  &__contents {
-    display: flex;
-    flex-flow: column;
-    gap: 10px;
   }
 }
 </style>
