@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom';
 import { ComponentPublicInstance } from 'vue';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import { createStore } from 'vuex';
@@ -15,6 +16,13 @@ const store = createStore<StateInterface>({
 
 let wrapper: VueWrapper<any, ComponentPublicInstance<{}, any>>;
 
+document.body.innerHTML = `
+  <div>
+    <h1>Non Vue app</h1>
+    <div id="app"></div>
+  </div>
+`;
+
 beforeEach(() => {
   const intitialProps: ProductWidgetProps = {
     id: 1,
@@ -23,7 +31,7 @@ beforeEach(() => {
     action: 'collects',
   };
   wrapper = shallowMount(ProductWidget, {
-    attachTo: document.body,
+    attachTo: '#app',
     props: intitialProps,
     global: {
       plugins: [[store, key]],
@@ -118,24 +126,25 @@ describe('ProductWidget', () => {
     ).toBe(true);
   });
 
+  // NOTE: The below tooltip tests do not work as expected
+  // I belive there's an issue with the configuration, that doesn't pick up the css styles applied to the HTML element
+  // Tried with both vue-test-util and jest-dom
   it.todo('The tooltip details are hidden by default');
-  // NOTE: Looking at vue test util docs, the below should code should work, but doesn't
   // , () => {
-  //   expect(wrapper.find('.productWidget__tooltipDetails').isVisible()).toBe(
-  //     false
-  //   );
+  //   expect(
+  //     wrapper.vm.$el.querySelector('.productWidget__tooltipDetails')
+  //   ).not.toBeVisible();
   // });
 
   it.todo('Hovering the tooltip displays the details');
-  // NOTE: Looking at vue test util docs, the below should code should work, but doesn't
   // , async () => {
   //   await wrapper.find('.icon.tooltip').trigger('mouseover');
-  //   expect(wrapper.find('.productWidget__tooltipDetails').isVisible()).toBe(
-  //     true
-  //   );
+  //   expect(
+  //     wrapper.vm.$el.querySelector('.productWidget__tooltipDetails')
+  //   ).toBeVisible();
   // });
 
-  it('Has a a radio input called "badge_colour", and has five of them', () => {
+  it('Has a radio input called "badge_colour", and has five of them', () => {
     expect(wrapper.find('input[type=radio][name^=badge_colour]').exists()).toBe(
       true
     );
