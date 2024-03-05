@@ -8,7 +8,8 @@
     <div class='productWidget__contents'>
       <div class='productWidget__inputContainer'>
         <div class='productWidget__inputCol productWidget__inputCol--right'>
-          <input type="checkbox" :id="`linked-${id}`" name="linked" value="linked" class='productWidget__input' v-model='computedLinked'>
+          <input type="checkbox" :id="`linked-${id}`" name="linked" value="linked" class='productWidget__input productWidget__input--checkbox' v-model='computedLinked'>
+          <span class='checkbox'></span>
         </div>
         <div class='productWidget__inputCol productWidget__inputCol--left'>
           <label :for="`linked-${id}`" class='productWidget__label'>Link to Public Profile</label>
@@ -159,13 +160,86 @@ const computedActive = computed({
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
+  }
 
-    input {
-      cursor: pointer;
+  &__input {
+    cursor: pointer;
+
+    &--checkbox {
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      box-sizing: border-box;
+      margin: 0;
+
+      &:hover {
+        + .checkbox:before {
+          opacity: 0.5;
+          visibility: visible;
+        }
+      }
+
+      &:checked {
+        + .checkbox {
+          background-color: #3B755F;
+          border-color: #3B755F;
+
+          &:before {
+            opacity: 0;
+            visibility: hidden;
+          }
+
+          &:after {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .checkbox {
+    position: relative;
+    display: block;
+    height: 18px;
+    width: 18px;
+    border: 2px solid #212121;
+    border-radius: 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:before {
+      content: "";
+      position: absolute;
+      background-color: #AFC6BD;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      visibility: hidden;
+      transition: .25s all ease;
+      z-index: 1;
+      height: 36px;
+      width: 36px;
+      border-radius: 100%;
+    }
+
+    &:after {
+      content: "✓";
+      color: white;
+      position: absolute;
+      display: none;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
   &__inputCol {
+    position: relative;
     display: flex;
     flex-flow: row;
 
@@ -175,6 +249,13 @@ const computedActive = computed({
 
     &--left {
       order: 0;
+    }
+  }
+
+  &__input {
+    &--checkbox {
+      border: 3px solid #212121;
+      border-radius: 3px;
     }
   }
 
