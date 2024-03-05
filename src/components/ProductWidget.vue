@@ -36,6 +36,7 @@
 
 <script setup lang="ts">
 import { computed, defineProps } from 'vue';
+import VueSvgInlinePlugin from 'vue-svg-inline-plugin';
 import { ProductWidgetProps, SelectedColorType } from '@/types';
 import { useStore } from '@/store'
 
@@ -73,11 +74,11 @@ const computedActive = computed({
     }
   }
 });
+const vSvgInline = VueSvgInlinePlugin;
 
 // TODO, style widget
 // TODO, query what should public profile link to
 // --- is there a default color, or can it be blank?
-// TODO, vuex & test top level
 // Please include a README describing what you’ve done and why, and how to run and use the service.
 </script>
 

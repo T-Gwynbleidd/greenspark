@@ -1,6 +1,5 @@
-import { createApp } from 'vue'
-import VueSvgInlinePlugin from 'vue-svg-inline-plugin';
+import { createApp } from 'vue';
 import App from './App.vue';
 import { store, key } from './store';
 
-createApp(App).use(store, key).use(VueSvgInlinePlugin).mount('#app');
+createApp(App).use(store, key).mount('#app');
