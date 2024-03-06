@@ -1,14 +1,14 @@
 <template>
-  <div class='spinner'>
-    <SvgGreensparkLogo />
-  </div>
+<div class='spinner'>
+  <SvgGreensparkLogo />
+</div>
 </template>
 
 <script setup lang="ts">
 import SvgGreensparkLogo from './SvgGreensparkLogo.vue';
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import '@/styles/core/colors.scss';
 
 .spinner {
@@ -29,6 +29,7 @@ import SvgGreensparkLogo from './SvgGreensparkLogo.vue';
     from {
       transform: rotate(0deg);
     }
+
     to {
       transform: rotate(359deg);
     }

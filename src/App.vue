@@ -1,47 +1,52 @@
 <template>
-  <section class='container'>
-    <header>
-      <h1 class='title cabin-bold'>Per product widgets</h1>
-      <hr class='line-break'>
-    </header>
-    <Transition name="fade" mode="out-in">
-      <LoadingSpinner v-if="isLoading"/>
-      <main v-else class='widget-container'>
-        <TransitionGroup appear
-          :css="false"
-          @before-enter="onBeforeEnter"
-          @enter="onEnter"
-          @leave="onLeave"
-          >
-          <ProductWidget 
-            v-for="(product, index) in store.state.products.allProducts"
-            :key='product.id'
-            :id='product.id'
-            :type='product.type'
-            :amount='product.amount'
-            :action='product.action'
-            :linked='product.linked'
-            :active='product.active'
-            :selected-color='product.selectedColor'
-            :data-index="index"
-            />
-        </TransitionGroup>
-      </main>
-    </Transition>
-  </section>
+<section class='container'>
+  <header>
+    <h1 class='title cabin-bold'>Per product widgets</h1>
+    <hr class='line-break'>
+  </header>
+  <Transition name="fade" mode="out-in">
+    <LoadingSpinner v-if="isLoading" />
+    <main v-else class='widget-container'>
+      <TransitionGroup
+        appear
+        :css="false"
+        @before-enter="onBeforeEnter"
+        @enter="onEnter"
+        @leave="onLeave"
+        >
+        <ProductWidget 
+          v-for="(product, index) in store.state.products.allProducts"
+          :key='product.id'
+          :id='product.id'
+          :type='product.type'
+          :amount='product.amount'
+          :action='product.action'
+          :linked='product.linked'
+          :active='product.active'
+          :selected-color='product.selectedColor'
+          :data-index="index"
+          />
+      </TransitionGroup>
+    </main>
+  </Transition>
+</section>
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, ref } from 'vue'
+import {
+  defineProps,
+  onMounted,
+  ref
+} from 'vue'
 import { useStore } from './store'
 import { gsap } from 'gsap'
 import ProductWidget from './components/ProductWidget.vue';
 import LoadingSpinner from './components/LoadingSpinner.vue';
 
 const store = useStore();
-const props = defineProps<{
-  loadDuration?: number
-}>()
+const props = defineProps < {
+  loadDuration ?: number
+} > ()
 
 const isLoading = ref(true);
 store.dispatch('products/getAllProducts');
@@ -56,7 +61,7 @@ onMounted(() => {
   }
 });
 // eslint-disable-next-line
-function onBeforeEnter(el: any ) {
+function onBeforeEnter(el: any) {
   el.style.opacity = '0';
   el.style.height = '0';
 }

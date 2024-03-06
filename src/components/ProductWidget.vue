@@ -1,90 +1,99 @@
 <template>
-  <aside class='productWidget'>
-    <header class='productWidget__header' :class='`productWidget__header--${selectedColor ? selectedColor : "white"}`'>
-      <SvgGreenspark />
-      <h3 class='productWidget__title'>This product {{ action }}<span class='cabin-bold'>{{ amount }}{{ type === 'carbon' ? `kgs of ${type}`: ` ${type}` }}</span></h3>
-    </header>
+<aside class='productWidget'>
+  <header class='productWidget__header' :class='`productWidget__header--${selectedColor ? selectedColor : "white"}`'>
+    <SvgGreenspark />
+    <h3 class='productWidget__title'>This product {{ action }}<span class='cabin-bold'>{{ amount }}{{ type === 'carbon' ? `kgs of ${type}`: ` ${type}` }}</span></h3>
+  </header>
 
-    <div class='productWidget__contents'>
-      <div class='productWidget__inputRow'>
-        <div class='productWidget__inputCol productWidget__inputCol--right'>
-          <div class='productWidget__inputContainer'>
-            <input type="checkbox" :id="`linked-${id}`" name="linked" value="linked" class='productWidget__input productWidget__input--checkbox' v-model='computedLinked'>
-            <span class='checkbox'></span>
-          </div>
-        </div>
-        <div class='productWidget__inputCol productWidget__inputCol--left'>
-          <label :for="`linked-${id}`" class='productWidget__label'>Link to Public Profile</label>
-          <div class='productWidget__tooltip'>
-            <SvgTooltip />
-            <div class='productWidget__tooltipDetails'>
-              <p>This widget links directly to your public profile so that you can easily share your impact with your customers. Turn it off here if you do not want the badge to link to it.</p>
-              <a href='#' class='cabin-bold'>View Public Profile</a>
-            </div>
-          </div>
+  <div class='productWidget__contents'>
+    <div class='productWidget__inputRow'>
+      <div class='productWidget__inputCol productWidget__inputCol--right'>
+        <div class='productWidget__inputContainer'>
+          <input type="checkbox" :id="`linked-${id}`" name="linked" value="linked" class='productWidget__input productWidget__input--checkbox' v-model='computedLinked'>
+          <span class='checkbox'></span>
         </div>
       </div>
-      
-      <div class='productWidget__inputRow'>
-        <div class='productWidget__inputCol productWidget__inputCol--left'>
-          <label :for="`badge_colour-${id}`" class='productWidget__label productWidget__label--no-point'>Badge colour</label>
-        </div>
-        <div class='productWidget__inputCol productWidget__inputCol--right'>
-          <div class='productWidget__inputContainer'>
-            <input type="radio" :id="`blue-${id}`" :name="`badge_colour-${id}`" :value='"blue"' aria-label='blue badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
-            <span class='radio radio--blue'></span>
+      <div class='productWidget__inputCol productWidget__inputCol--left'>
+        <label :for="`linked-${id}`" class='productWidget__label'>Link to Public Profile</label>
+        <div class='productWidget__tooltip'>
+          <SvgTooltip />
+          <div class='productWidget__tooltipDetails'>
+            <p>This widget links directly to your public profile so that you can easily share your impact with your customers. Turn it off here if you do not want the badge to link to it.</p>
+            <a href='#' class='cabin-bold'>View Public Profile</a>
           </div>
-            <div class='productWidget__inputContainer'>
-            <input type="radio" :id="`green-${id}`" :name="`badge_colour-${id}`" :value='"green"' aria-label='green badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
-            <span class='radio radio--green'></span>
-          </div>
-          <div class='productWidget__inputContainer'>
-            <input type="radio" :id="`beige-${id}`" :name="`badge_colour-${id}`" :value='"beige"' aria-label='beige badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
-            <span class='radio radio--beige'></span>
-          </div>
-          <div class='productWidget__inputContainer'>
-            <input type="radio" :id="`white-${id}`" :name="`badge_colour-${id}`" :value='"white"' aria-label='white badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
-            <span class='radio radio--white'></span>
-          </div>
-          <div class='productWidget__inputContainer'>
-            <input type="radio" :id="`black-${id}`" :name="`badge_colour-${id}`" :value='"black"' aria-label='black badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
-            <span class='radio radio--black'></span>
-          </div>
-        </div>
-      </div>
-
-      <div class='productWidget__inputRow'>
-        <div class='productWidget__inputCol productWidget__inputCol--right'>
-          <div class='productWidget__inputContainer'>
-            <input type="checkbox" :id="`active-${id}`" name="active" value="active" class='productWidget__input productWidget__input--toggle' v-model='computedActive'>
-            <div class='toggle-slider'>
-              <span class='toggle'></span>
-            </div>
-          </div>
-        </div>
-        <div class='productWidget__inputCol productWidget__inputCol--left'>
-          <label :for="`active-${id}`" class='productWidget__label'>Activate Badge</label>
         </div>
       </div>
     </div>
-  </aside>
+
+    <div class='productWidget__inputRow'>
+      <div class='productWidget__inputCol productWidget__inputCol--left'>
+        <label :for="`badge_colour-${id}`" class='productWidget__label productWidget__label--no-point'>Badge colour</label>
+      </div>
+      <div class='productWidget__inputCol productWidget__inputCol--right'>
+        <div class='productWidget__inputContainer'>
+          <input type="radio" :id="`blue-${id}`" :name="`badge_colour-${id}`" :value='"blue"' aria-label='blue badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+          <span class='radio radio--blue'></span>
+        </div>
+        <div class='productWidget__inputContainer'>
+          <input type="radio" :id="`green-${id}`" :name="`badge_colour-${id}`" :value='"green"' aria-label='green badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+          <span class='radio radio--green'></span>
+        </div>
+        <div class='productWidget__inputContainer'>
+          <input type="radio" :id="`beige-${id}`" :name="`badge_colour-${id}`" :value='"beige"' aria-label='beige badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+          <span class='radio radio--beige'></span>
+        </div>
+        <div class='productWidget__inputContainer'>
+          <input type="radio" :id="`white-${id}`" :name="`badge_colour-${id}`" :value='"white"' aria-label='white badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+          <span class='radio radio--white'></span>
+        </div>
+        <div class='productWidget__inputContainer'>
+          <input type="radio" :id="`black-${id}`" :name="`badge_colour-${id}`" :value='"black"' aria-label='black badge colour' class='productWidget__input productWidget__input--radio' v-model="computedColor">
+          <span class='radio radio--black'></span>
+        </div>
+      </div>
+    </div>
+
+    <div class='productWidget__inputRow'>
+      <div class='productWidget__inputCol productWidget__inputCol--right'>
+        <div class='productWidget__inputContainer'>
+          <input type="checkbox" :id="`active-${id}`" name="active" value="active" class='productWidget__input productWidget__input--toggle' v-model='computedActive'>
+          <div class='toggle-slider'>
+            <span class='toggle'></span>
+          </div>
+        </div>
+      </div>
+      <div class='productWidget__inputCol productWidget__inputCol--left'>
+        <label :for="`active-${id}`" class='productWidget__label'>Activate Badge</label>
+      </div>
+    </div>
+  </div>
+</aside>
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import {
+  computed,
+  defineProps
+} from 'vue';
 import SvgGreenspark from './SvgGreenspark.vue';
 import SvgTooltip from './SvgTooltip.vue';
-import { ProductWidgetProps, SelectedColorType } from '@/types';
+import {
+  ProductWidgetProps,
+  SelectedColorType
+} from '@/types';
 import { useStore } from '@/store'
 
 const store = useStore();
-const props = defineProps<ProductWidgetProps>();
+const props = defineProps < ProductWidgetProps > ();
 const computedLinked = computed({
   get() {
     return props.linked;
   },
   set(newValue) {
-    store.dispatch('products/amendProduct', {id: props.id, linked: newValue});
+    store.dispatch('products/amendProduct', {
+      id: props.id,
+      linked: newValue
+    });
   }
 });
 const computedColor = computed({
@@ -96,7 +105,10 @@ const computedColor = computed({
     }
   },
   set(newValue: SelectedColorType) {
-    store.dispatch('products/amendProduct', {id: props.id, selectedColor: newValue});
+    store.dispatch('products/amendProduct', {
+      id: props.id,
+      selectedColor: newValue
+    });
   }
 });
 const computedActive = computed({
@@ -105,15 +117,21 @@ const computedActive = computed({
   },
   set(newValue) {
     if (newValue === true) {
-      store.dispatch('products/changeActiveProduct', {id: props.id, active: newValue});
+      store.dispatch('products/changeActiveProduct', {
+        id: props.id,
+        active: newValue
+      });
     } else {
-      store.dispatch('products/amendProduct', {id: props.id, active: newValue});
+      store.dispatch('products/amendProduct', {
+        id: props.id,
+        active: newValue
+      });
     }
   }
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import '@/styles/core/colors.scss';
 @import '@/styles/tools/media-queries/above';
 
@@ -129,20 +147,24 @@ const computedActive = computed({
     border-radius: 5.95px;
     color: $off-white;
     transition: .25s all ease;
-          
+
     &--white {
       background-color: $white;
       color: $green;
     }
+
     &--black {
       background-color: $black;
     }
+
     &--blue {
       background-color: $blue;
     }
+
     &--green {
       background-color: $green;
     }
+
     &--beige {
       background-color: $beige;
       color: $green;
@@ -204,23 +226,23 @@ const computedActive = computed({
   }
 
   &__input {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      margin: 0;
-      box-sizing: border-box;
-      opacity: 0;
-      z-index: 2;
-      cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    box-sizing: border-box;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
 
     &--checkbox {
-      &:hover + .checkbox:before {
+      &:hover+.checkbox:before {
         opacity: 0.5;
       }
 
-      &:checked + .checkbox {
+      &:checked+.checkbox {
         background-color: $green;
         border-color: $green;
 
@@ -235,21 +257,21 @@ const computedActive = computed({
     }
 
     &--radio {
-      &:hover + .radio {
+      &:hover+.radio {
         opacity: 0.8;
       }
 
-      &:checked + .radio {
+      &:checked+.radio {
         border: 1.5px solid $border;
       }
     }
 
     &--toggle {
-      &:hover + .toggle-slider .toggle {
+      &:hover+.toggle-slider .toggle {
         outline: 5.4px solid rgba($light-green, 0.8);
       }
 
-      &:checked + .toggle-slider {
+      &:checked+.toggle-slider {
         background-color: $green;
 
         .toggle {
@@ -314,7 +336,7 @@ const computedActive = computed({
     }
 
     &--beige {
-      background-color: $beige;;
+      background-color: $beige;
     }
 
     &--white {
@@ -375,8 +397,9 @@ const computedActive = computed({
       color: $green;
       cursor: pointer;
 
-      &:hover, &:focus {
-        ~ #{ $block }__tooltipDetails {
+      &:hover,
+      &:focus {
+        ~#{ $block }__tooltipDetails {
           visibility: visible;
           opacity: 1;
           transition: .25s all ease;
@@ -407,7 +430,8 @@ const computedActive = computed({
       transition: .25s all ease;
       transition-delay: .25s;
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         visibility: visible;
         opacity: 1;
         transform: translateX(-55%);
@@ -426,7 +450,8 @@ const computedActive = computed({
         color: $green;
         text-decoration: none;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           text-decoration: underline;
         }
       }
