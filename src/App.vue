@@ -66,11 +66,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   @include above('tablet-portrait') {
-    padding: 60px 60px 100px;
-    min-height: calc(100vh - 160px);
     justify-content: center;
   }
 
+  @include above('tablet-medium') {
+    padding: 60px 60px 100px;
+    min-height: calc(100vh - 160px);
+  }
 }
 
 .container {
@@ -85,8 +87,15 @@ body {
   overflow: hidden;
 
   @include above('tablet-portrait') {
-    max-width: 851px;
     min-height: 419px;
+  }
+
+  @include above('tablet-medium') {
+    max-width: calc(100vw - 182px);
+  }
+
+  @include above('tablet-landscape') {
+    max-width: 851px;
   }
 }
 
