@@ -13,7 +13,7 @@ const store = createStore<StateInterface>({
     products,
   },
 });
-
+// eslint-disable-next-line
 let wrapper: VueWrapper<any, ComponentPublicInstance<{}, any>>;
 
 beforeEach(() => {

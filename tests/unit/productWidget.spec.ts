@@ -13,7 +13,7 @@ const store = createStore<StateInterface>({
     products,
   },
 });
-
+// eslint-disable-next-line
 let wrapper: VueWrapper<any, ComponentPublicInstance<{}, any>>;
 
 document.body.innerHTML = `
@@ -162,7 +162,7 @@ describe('ProductWidget', () => {
 
   it('The default selection is that "badge_colour" radio input is white', () => {
     const radioInputs = wrapper.vm.$el.querySelectorAll('input[type=radio]');
-    radioInputs.forEach((radio: any) => {
+    radioInputs.forEach((radio: { value: string; checked: boolean; }) => {
       if (radio.value === 'white') {
         expect(radio.checked).toBe(true);
       } else {
@@ -175,7 +175,7 @@ describe('ProductWidget', () => {
     const selectedColor = 'beige';
     await wrapper.setProps({ selectedColor });
     const radioInputs = wrapper.vm.$el.querySelectorAll('input[type=radio]');
-    radioInputs.forEach((radio: any) => {
+    radioInputs.forEach((radio: { value: string; checked: boolean; }) => {
       if (radio.value === selectedColor) {
         expect(radio.checked).toBe(true);
       } else {
