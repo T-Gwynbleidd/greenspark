@@ -15,8 +15,8 @@ import SvgGreensparkLogo from './SvgGreensparkLogo.vue';
   $block: &;
   display: flex;
   justify-content: center;
-  grid-column: span 3;
   margin-top: 50px;
+  margin-bottom: 50px;
   color: $green;
 
   .logo {
