@@ -114,7 +114,8 @@ const computedActive = computed({
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/colors.scss';
+@import '@/styles/core/colors.scss';
+@import '@/styles/tools/media-queries/above';
 
 .productWidget {
   $block: &;
@@ -146,10 +147,6 @@ const computedActive = computed({
       background-color: $beige;
       color: $green;
     }
-    // TODO, if above class is ...
-    // #{ $block }--reversed & {
-    //   background: rebeccapurple;
-    // }
 
     .icon.logo {
       flex-shrink: 0;
@@ -384,7 +381,11 @@ const computedActive = computed({
           opacity: 1;
           transition: .25s all ease;
           transition-delay: 0s;
-          transform: translateX(-30%);
+          transform: translateX(-55%);
+
+          @include above('tablet-portrait') {
+            transform: translateX(-30%);
+          }
         }
       }
     }
@@ -402,14 +403,18 @@ const computedActive = computed({
       box-shadow: 0px 42px 76px 0px #00000026;
       visibility: hidden;
       opacity: 0;
-      z-index: 1;
+      z-index: 3;
       transition: .25s all ease;
       transition-delay: .25s;
 
       &:hover, &:focus {
         visibility: visible;
         opacity: 1;
-        transform: translateX(-30%);
+        transform: translateX(-55%);
+
+        @include above('tablet-portrait') {
+          transform: translateX(-30%);
+        }
       }
 
       p {

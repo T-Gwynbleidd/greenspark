@@ -10,7 +10,7 @@
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/colors.scss';
+@import '@/styles/core/colors.scss';
 
 .spinner {
   $block: &;

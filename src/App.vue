@@ -49,7 +49,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import '@/styles/colors.scss';
+@import '@/styles/core/colors.scss';
+@import '@/styles/tools/media-queries/above';
 
 body {
   margin: 0;
@@ -58,12 +59,18 @@ body {
 #app {
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  padding: 60px 60px 100px;
-  min-height: calc(100vh - 160px);
+  padding: 48px 22px;
+  min-height: calc(100vh - 96px);
   font-family: "Cabin", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @include above('tablet-portrait') {
+    padding: 60px 60px 100px;
+    min-height: calc(100vh - 160px);
+    justify-content: center;
+  }
+
 }
 
 .container {
@@ -71,11 +78,16 @@ body {
   margin-right: auto;
   padding: 36px;
   width: 100%;
-  max-width: 851px;
-  min-height: 419px;
+  max-width: calc(100vw - 116px);
   background-color: $off-white;
   border-radius: 8px;
   box-shadow: 0px 42px 76px 0px #00000026;
+  overflow: hidden;
+
+  @include above('tablet-portrait') {
+    max-width: 851px;
+    min-height: 419px;
+  }
 }
 
 .title {
@@ -84,9 +96,15 @@ body {
   font-size: 30px;
   line-height: 36px;
   color: $black;
+  text-align: center;
+
+  @include above('tablet-portrait') {
+    text-align: left;
+  }
 }
 
 .line-break {
+  margin-top: 0;
   margin-bottom: 18px;
   height: 2px;
   background-color: $border;
@@ -96,7 +114,12 @@ body {
 .widget-container {
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr;
   gap: 38px;
+  padding: 0 20px;
+
+  @include above('tablet-portrait') {
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0;
+  }
 }
 </style>

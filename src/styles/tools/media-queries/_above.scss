@@ -1,0 +1,9 @@
+@import '../functions/breakpoint-value';
+
+@mixin above($key) {
+  $min-width: breakpoint-value($key);
+
+  @media screen and (min-width: #{$min-width}) {
+    @content;
+  }
+}
