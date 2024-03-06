@@ -114,35 +114,37 @@ const computedActive = computed({
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/colors.scss';
+
 .productWidget {
   $block: &;
 
   &__header {
-    padding: 10.3px 11.91px;
-    margin-bottom: 10px;
-    border-radius: 5.95px;
-    color: #F9F9F9;
     display: flex;
     flex-flow: row;
     gap: 24px;
+    margin-bottom: 10px;
+    padding: 10.3px 11.91px;
+    border-radius: 5.95px;
+    color: $off-white;
     transition: .25s all ease;
           
     &--white {
-      background-color: #FFFFFF;
-      color: #3B755F;
+      background-color: $white;
+      color: $green;
     }
     &--black {
-      background-color: #212121;
+      background-color: $black;
     }
     &--blue {
-      background-color: #2E3A8C;
+      background-color: $blue;
     }
     &--green {
-      background-color: #3B755F;
+      background-color: $green;
     }
     &--beige {
-      background-color: #F2EBDB;
-      color: #3B755F;
+      background-color: $beige;
+      color: $green;
     }
     // TODO, if above class is ...
     // #{ $block }--reversed & {
@@ -150,20 +152,20 @@ const computedActive = computed({
     // }
 
     .icon.logo {
+      flex-shrink: 0;
       width: 39.7px;
       height: 45.51px;
-      flex-shrink: 0;
     }
   }
 
   &__title {
-    min-height: 21.59px;
-    font-size: 12.41px;
-    line-height: 15.07px;
-    margin: 0;
     display: flex;
     flex-flow: column;
     justify-content: space-around;
+    margin: 0;
+    min-height: 21.59px;
+    font-size: 12.41px;
+    line-height: 15.07px;
     font-weight: 400;
 
     span {
@@ -206,14 +208,14 @@ const computedActive = computed({
 
   &__input {
       position: absolute;
-      opacity: 0;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 2;
-      box-sizing: border-box;
       margin: 0;
+      box-sizing: border-box;
+      opacity: 0;
+      z-index: 2;
       cursor: pointer;
 
     &--checkbox {
@@ -222,8 +224,8 @@ const computedActive = computed({
       }
 
       &:checked + .checkbox {
-        background-color: #3B755F;
-        border-color: #3B755F;
+        background-color: $green;
+        border-color: $green;
 
         &:before {
           opacity: 0;
@@ -241,17 +243,17 @@ const computedActive = computed({
       }
 
       &:checked + .radio {
-        border: 1.5px solid #B0B0B0;
+        border: 1.5px solid $border;
       }
     }
 
     &--toggle {
       &:hover + .toggle-slider .toggle {
-        outline: 5.4px solid #AFC6BD80;
+        outline: 5.4px solid rgba($light-green, 0.8);
       }
 
       &:checked + .toggle-slider {
-        background-color: #3B755F;
+        background-color: $green;
 
         .toggle {
           transform: translateX(20px);
@@ -265,7 +267,7 @@ const computedActive = computed({
     display: block;
     height: 18px;
     width: 18px;
-    border: 2px solid #212121;
+    border: 2px solid $black;
     border-radius: 3px;
     box-sizing: border-box;
     cursor: pointer;
@@ -273,26 +275,26 @@ const computedActive = computed({
     &:before {
       content: "";
       position: absolute;
-      background-color: #AFC6BD;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      transition: .25s all ease;
-      z-index: 1;
       height: 36px;
       width: 36px;
+      opacity: 0;
+      z-index: 1;
+      background-color: $light-green;
       border-radius: 100%;
       pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: .25s all ease;
     }
 
     &:after {
       content: "✓";
-      color: white;
       position: absolute;
-      opacity: 0;
       top: -5px;
       left: 1px;
+      opacity: 0;
+      color: white;
       transition: .25s all ease;
     }
   }
@@ -307,23 +309,23 @@ const computedActive = computed({
     transition: .25s all ease;
 
     &--blue {
-      background-color: #2E3A8C;
+      background-color: $blue;
     }
 
     &--green {
-      background-color: #3B755F;
+      background-color: $green;
     }
 
     &--beige {
-      background-color: #F2EBDB;;
+      background-color: $beige;;
     }
 
     &--white {
-      background-color: #ffffff;
+      background-color: $white;
     }
 
     &--black {
-      background-color: #212121;
+      background-color: $black;
     }
   }
 
@@ -334,8 +336,8 @@ const computedActive = computed({
     width: 40.11px;
     border-radius: 34.18px;
     box-sizing: border-box;
-    background: #F9F9F9;
-    border: 0.59px solid #AFC6BD;
+    background: $off-white;
+    border: 0.59px solid $light-green;
     box-shadow: 0px 0.884669303894043px 5.897795677185059px 0px #00000026 inset;
     cursor: pointer;
     transition: .4s;
@@ -347,8 +349,8 @@ const computedActive = computed({
     left: -1px;
     height: 21.05px;
     width: 21.05px;
-    background: #F9F9F9;
-    border: 0.59px solid #F2EBDB;
+    background: $off-white;
+    border: 0.59px solid $beige;
     box-shadow: 0px 0px 1.1795591115951538px 0px #00000059;
     border-radius: 29.49px;
     transition: .4s;
@@ -358,7 +360,7 @@ const computedActive = computed({
   &__label {
     font-size: 14px;
     line-height: 17.01px;
-    color: #3B755F;
+    color: $green;
     cursor: pointer;
 
     &--no-point {
@@ -371,9 +373,9 @@ const computedActive = computed({
     top: -3px;
 
     .icon.tooltip {
-      color: #3B755F;
       height: 12px;
       width: 12px;
+      color: $green;
       cursor: pointer;
 
       &:hover, &:focus {
@@ -389,21 +391,20 @@ const computedActive = computed({
 
     #{ $block }__tooltipDetails {
       position: absolute;
-      visibility: hidden;
-      opacity: 0;
-      transition: .25s all ease;
-      transition-delay: .25s;
-      border-radius: 4px;
+      left: 50%;
       padding: 24px 16px 24px 16px;
       width: 248px;
-      background-color: #FFFFFF;
-      z-index: 1;
-      text-align: center;
+      border-radius: 4px;
       font-size: 14px;
       line-height: 17.01px;
-      left: 50%;
+      background-color: $white;
+      text-align: center;
       box-shadow: 0px 42px 76px 0px #00000026;
-
+      visibility: hidden;
+      opacity: 0;
+      z-index: 1;
+      transition: .25s all ease;
+      transition-delay: .25s;
 
       &:hover, &:focus {
         visibility: visible;
@@ -417,7 +418,7 @@ const computedActive = computed({
 
       a {
         letter-spacing: -2%;
-        color: #3B755F;
+        color: $green;
         text-decoration: none;
 
         &:hover, &:focus {

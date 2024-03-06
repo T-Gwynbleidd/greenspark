@@ -49,37 +49,48 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
+@import '@/styles/colors.scss';
+
+body {
+  margin: 0;
+}
+
 #app {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  padding: 60px 60px 100px;
+  min-height: calc(100vh - 160px);
   font-family: "Cabin", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-top: 60px;
 }
 
 .container {
-  box-shadow: 0px 42px 76px 0px #00000026;
-  background-color: #F9F9F9;
-  border-radius: 8px;
-  max-width: 851px;
-  min-height: 419px;
   margin-left: auto;
   margin-right: auto;
   padding: 36px;
+  width: 100%;
+  max-width: 851px;
+  min-height: 419px;
+  background-color: $off-white;
+  border-radius: 8px;
+  box-shadow: 0px 42px 76px 0px #00000026;
 }
 
 .title {
-  color: #212121;
-  line-height: 36px;
-  font-size: 30px;
   margin: 0;
   padding-bottom: 12px;
+  font-size: 30px;
+  line-height: 36px;
+  color: $black;
 }
 
 .line-break {
-  height: 2px;
-  background-color: #B0B0B0;
-  border: none;
   margin-bottom: 18px;
+  height: 2px;
+  background-color: $border;
+  border: none;
 }
 
 .widget-container {
