@@ -1,7 +1,7 @@
 <template>
   <aside class='productWidget'>
     <header class='productWidget__header' :class='`productWidget__header--${selectedColor ? selectedColor : "white"}`'>
-      <img v-svg-inline class="icon logo" src="../assets/greenspark.svg" alt="greenspark logo" />
+      <SvgGreenspark />
       <h3 class='productWidget__title'>This product {{ action }}<span class='cabin-bold'>{{ amount }}{{ type === 'carbon' ? `kgs of ${type}`: ` ${type}` }}</span></h3>
     </header>
 
@@ -16,7 +16,7 @@
         <div class='productWidget__inputCol productWidget__inputCol--left'>
           <label :for="`linked-${id}`" class='productWidget__label'>Link to Public Profile</label>
           <div class='productWidget__tooltip'>
-            <img v-svg-inline class="icon tooltip" src="../assets/tooltip.svg" alt="tooltip icon" />
+            <SvgTooltip />
             <div class='productWidget__tooltipDetails'>
               <p>This widget links directly to your public profile so that you can easily share your impact with your customers. Turn it off here if you do not want the badge to link to it.</p>
               <a href='#' class='cabin-bold'>View Public Profile</a>
@@ -72,7 +72,8 @@
 
 <script setup lang="ts">
 import { computed, defineProps } from 'vue';
-// import VueSvgInlinePlugin from 'vue-svg-inline-plugin';
+import SvgGreenspark from './SvgGreenspark.vue';
+import SvgTooltip from './SvgTooltip.vue';
 import { ProductWidgetProps, SelectedColorType } from '@/types';
 import { useStore } from '@/store'
 
@@ -110,7 +111,6 @@ const computedActive = computed({
     }
   }
 });
-// TODO const vSvgInline = VueSvgInlinePlugin;
 </script>
 
 <style scoped lang="scss">

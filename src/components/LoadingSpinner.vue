@@ -1,12 +1,11 @@
 <template>
   <div class='spinner'>
-    <img v-svg-inline class="icon logo" src="../assets/greenspark-logo.svg" alt="greenspark logo" />
+    <SvgGreensparkLogo />
   </div>
 </template>
 
 <script setup lang="ts">
-// TODO import VueSvgInlinePlugin from 'vue-svg-inline-plugin';
-// const vSvgInline = VueSvgInlinePlugin;
+import SvgGreensparkLogo from './SvgGreensparkLogo.vue';
 </script>
 
 <style scoped lang="scss">

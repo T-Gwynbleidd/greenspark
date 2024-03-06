@@ -1,5 +1,5 @@
 # greenspark code task
-This project was setup using vue create, options selected for Vue3, dart-sass, babel, Typescript, Vuex, eslint and unit-jest. Minimal other modules were installed, except to allow for inline svg files, and to address some TDD issues I came across.
+This project was setup using vue create, options selected for Vue3, dart-sass, babel, Typescript, Vuex, eslint and unit-jest. Minimal other modules were installed, for a little animation, and to address some TDD issues I came across.
 
 It was my first time building a Vue3 app, using Vuex. As well as my first time coding with Typescript and approaching it using TDD with Jest.
 I had done some learning on both Typescript and TDD before hearing from Greenspark and being presented with this code task, so it seemed like the perfect opportunity to put them into practice, and to challenge myself to apply them to Vue3/Vuex inline with your tech stack.
@@ -14,6 +14,8 @@ I used the [docs](https://vuex.vuejs.org/) to try and set this up in the cleanes
 Once I had the app compiling without issues, pulling data from the API, and mutating the state through dispatched actions as expected, I then went back to the app.spec.ts file to add some tests to check that the store was interacting as desired.
 
 Once I had all of the functionality in place, the code tidy and the tests passing I styled the component.
+
+Note: I considered extracting the input & labels into a custom component, to separate out the unique styling and to enable re-use. However for the sake of this isolated task, I thought it simpler to leave them within the ProductWidget component due to the two-way binding and passing of props.
 
 ## Project setup
 ```

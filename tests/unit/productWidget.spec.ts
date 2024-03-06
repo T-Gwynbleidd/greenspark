@@ -53,7 +53,9 @@ describe('ProductWidget', () => {
   });
 
   it('Has a header element with a logo', () => {
-    expect(wrapper.find('header img').exists()).toBe(true);
+    expect(wrapper.findComponent({ name: 'SvgGreenspark' }).exists()).toBe(
+      true
+    );
   });
 
   it('Has a h3 element in the header', () => {
