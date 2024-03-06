@@ -12,6 +12,7 @@ export default async function getProducts() {
     return products;
   } catch (error) {
     if (debug) {
+      // eslint-disable-next-line
       console.error(`getProducts error: ${error}`);
     }
     throw new Error(`Product API error: ${getErrorMessage(error)}`);

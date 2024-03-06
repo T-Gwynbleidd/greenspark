@@ -51,6 +51,7 @@ const mutations = {
       }
     } catch (error) {
       if (debug) {
+        // eslint-disable-next-line
         console.error(
           `Store module, products mutation error: ${getErrorMessage(error)}`
         );
@@ -74,6 +75,7 @@ const mutations = {
       });
     } catch (error) {
       if (debug) {
+        // eslint-disable-next-line
         console.error(
           `Store module, products mutation error: ${getErrorMessage(error)}`
         );
@@ -89,7 +91,10 @@ const actions = {
     if (products) {
       commit('setProducts', { products });
     } else {
-      console.warn('No products returned by API.');
+      if (debug) {
+        // eslint-disable-next-line
+        console.warn('No products returned by API.');
+      }
     }
   },
 
@@ -100,7 +105,10 @@ const actions = {
     if (payload) {
       commit('amendProduct', payload);
     } else {
-      console.warn('No product passed to amendProduct action.');
+      if (debug) {
+        // eslint-disable-next-line
+        console.warn('No product passed to amendProduct action.');
+      }
     }
   },
 
@@ -111,7 +119,10 @@ const actions = {
     if (payload) {
       commit('changeActiveProduct', payload);
     } else {
-      console.warn('No product passed to changeActiveProduct action.');
+      if (debug) {
+        // eslint-disable-next-line
+        console.warn('No product passed to changeActiveProduct action.');
+      }
     }
   },
 };
