@@ -1,0 +1,16 @@
+@import '../functions/breakpoint-value';
+
+@mixin breakpoint($key) {
+  @if $key {
+    @media only screen and (min-width: $key) {
+      @content;
+    }
+  }
+}
+
+// Example use
+/*
+@include breakpoint(777px) {
+    font-size: 140%;
+}
+*/

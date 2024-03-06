@@ -45,12 +45,14 @@ onMounted(() => {
   }
 });
 
-// TODO https://vuejs.org/guide/built-ins/transition.html#transition, transition loader, and loading of product widgets
+// TODO https://vuejs.org/guide/built-ins/transition.html#transition
+//transition loader, and loading of product widgets
 </script>
 
 <style lang="scss">
 @import '@/styles/core/colors.scss';
 @import '@/styles/tools/media-queries/above';
+@import '@/styles/tools/media-queries/breakpoint';
 
 body {
   margin: 0;
@@ -64,6 +66,7 @@ body {
   font-family: "Cabin", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 
   @include above('tablet-portrait') {
     justify-content: center;
@@ -84,7 +87,6 @@ body {
   background-color: $off-white;
   border-radius: 8px;
   box-shadow: 0px 42px 76px 0px #00000026;
-  overflow: hidden;
 
   @include above('tablet-portrait') {
     min-height: 419px;
@@ -125,6 +127,11 @@ body {
   grid-template-rows: auto;
   gap: 38px;
   padding: 0 20px;
+
+  @include breakpoint(550px) {
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+  }
 
   @include above('tablet-portrait') {
     grid-template-columns: 1fr 1fr 1fr;

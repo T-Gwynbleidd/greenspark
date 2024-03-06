@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-// import VueSvgInlinePlugin from 'vue-svg-inline-plugin';
+// TODO import VueSvgInlinePlugin from 'vue-svg-inline-plugin';
 // const vSvgInline = VueSvgInlinePlugin;
 </script>
 
