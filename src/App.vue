@@ -4,26 +4,37 @@
       <h1 class='title cabin-bold'>Per product widgets</h1>
       <hr class='line-break'>
     </header>
-    <main class='widget-container'>
+    <Transition name="fade" mode="out-in">
       <LoadingSpinner v-if="isLoading"/>
-      <ProductWidget v-else
-        v-for="(product) in store.state.products.allProducts"
-        :key='product.id'
-        :id='product.id'
-        :type='product.type'
-        :amount='product.amount'
-        :action='product.action'
-        :linked='product.linked'
-        :active='product.active'
-        :selected-color='product.selectedColor'
-        />
-    </main>
+      <main v-else class='widget-container'>
+        <TransitionGroup appear
+          :css="false"
+          @before-enter="onBeforeEnter"
+          @enter="onEnter"
+          @leave="onLeave"
+          >
+          <ProductWidget 
+            v-for="(product, index) in store.state.products.allProducts"
+            :key='product.id'
+            :id='product.id'
+            :type='product.type'
+            :amount='product.amount'
+            :action='product.action'
+            :linked='product.linked'
+            :active='product.active'
+            :selected-color='product.selectedColor'
+            :data-index="index"
+            />
+        </TransitionGroup>
+      </main>
+    </Transition>
   </section>
 </template>
 
 <script setup lang="ts">
 import { defineProps, onMounted, ref } from 'vue'
 import { useStore } from './store'
+import { gsap } from 'gsap'
 import ProductWidget from './components/ProductWidget.vue';
 import LoadingSpinner from './components/LoadingSpinner.vue';
 
@@ -44,9 +55,29 @@ onMounted(() => {
     isLoading.value = false;
   }
 });
-
-// TODO https://vuejs.org/guide/built-ins/transition.html#transition
-//transition loader, and loading of product widgets
+// eslint-disable-next-line
+function onBeforeEnter(el: any ) {
+  el.style.opacity = '0';
+  el.style.height = '0';
+}
+// eslint-disable-next-line
+function onEnter(el: any, done: () => void) {
+  gsap.to(el, {
+    opacity: 1,
+    height: 'auto',
+    delay: (el.dataset.index ? el.dataset.index : 1) * 0.25,
+    onComplete: done
+  })
+}
+// eslint-disable-next-line
+function onLeave(el: any, done: () => void) {
+  gsap.to(el, {
+    opacity: 0,
+    height: 0,
+    delay: (el.dataset.index ? el.dataset.index : 1) * 0.25,
+    onComplete: done
+  })
+}
 </script>
 
 <style lang="scss">
@@ -137,5 +168,15 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     padding: 0;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
